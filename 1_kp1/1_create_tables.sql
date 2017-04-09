@@ -41,7 +41,7 @@ CREATE TABLE `tests` (
 CREATE TABLE `reports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `test_id` bigint(20) unsigned NOT NULL,
-  `avr_score` tinyint(10) unsigned,
+  `avr_score` double unsigned,
   `avr_time` time,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`test_id`) REFERENCES `tests`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
