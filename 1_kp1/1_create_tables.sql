@@ -1,15 +1,21 @@
-DROP TABLE IF EXISTS `users`;;
-DROP TABLE IF EXISTS `tests`;;
-DROP TABLE IF EXISTS `series`;;
 DROP TABLE IF EXISTS `reports`;;
+DROP TABLE IF EXISTS `answers`;;
 DROP TABLE IF EXISTS `questions`;;
 DROP TABLE IF EXISTS `compl_tests`;;
 DROP TABLE IF EXISTS `scores`;;
-DROP TABLE IF EXISTS `answers`;;
+
+DROP TABLE IF EXISTS `login`;;
+DROP TABLE IF EXISTS `login_fb`;;
+DROP TABLE IF EXISTS `login_vk`;;
+
+DROP TABLE IF EXISTS `tests`;;
+DROP TABLE IF EXISTS `series`;;
+DROP TABLE IF EXISTS `users`;;
 
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `bday` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -78,4 +84,28 @@ CREATE TABLE `answers` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`question_id`) REFERENCES `questions`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (`compl_test_id`) REFERENCES `compl_tests`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+
+CREATE TABLE `login` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+
+CREATE TABLE `login_fb` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `fb_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
+
+CREATE TABLE `login_vk` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `vk_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;;
