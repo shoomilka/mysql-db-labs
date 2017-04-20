@@ -1,48 +1,48 @@
--- 1. Представлення, яке повертає усі дані таблиці.
+-- 1. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” СѓСЃС– РґР°РЅС– С‚Р°Р±Р»РёС†С–.
 CREATE VIEW view_all_users AS SELECT * FROM users;
 
--- 2. Представлення, яке повертає рядки, що задовольняють наперед заданій умові.
+-- 2. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” СЂСЏРґРєРё, С‰Рѕ Р·Р°РґРѕРІРѕР»СЊРЅСЏСЋС‚СЊ РЅР°РїРµСЂРµРґ Р·Р°РґР°РЅС–Р№ СѓРјРѕРІС–.
 CREATE VIEW view_really_bd AS SELECT * FROM users WHERE created_at = updated_at;
 
--- 3. Представлення, яке повертає рядки, що задовольняють наперед заданим умовам.
+-- 3. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” СЂСЏРґРєРё, С‰Рѕ Р·Р°РґРѕРІРѕР»СЊРЅСЏСЋС‚СЊ РЅР°РїРµСЂРµРґ Р·Р°РґР°РЅРёРј СѓРјРѕРІР°Рј.
 CREATE VIEW view_emp_3 AS SELECT * FROM emp WHERE deptno = 10 or (sal <= 2000 and deptno = 20);
 
--- 4. Представлення, яке повертає конкретні стовпці.
+-- 4. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” РєРѕРЅРєСЂРµС‚РЅС– СЃС‚РѕРІРїС†С–.
 CREATE VIEW view_emp_4 AS SELECT ename, deptno, sal FROM emp;
 
--- 5. Представлення, яке повертає конкретні стовпці, які мають зрозумілі та зручні для читання імена (псевдоніми).
+-- 5. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” РєРѕРЅРєСЂРµС‚РЅС– СЃС‚РѕРІРїС†С–, СЏРєС– РјР°СЋС‚СЊ Р·СЂРѕР·СѓРјС–Р»С– С‚Р° Р·СЂСѓС‡РЅС– РґР»СЏ С‡РёС‚Р°РЅРЅСЏ С–РјРµРЅР° (РїСЃРµРІРґРѕРЅС–РјРё).
 CREATE VIEW view_emp_5 AS SELECT ename as employee_name, sal as salary FROM emp;
 
--- 6. Представлення, яке використовує конкатенацію стовпців.
+-- 6. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РІРёРєРѕСЂРёСЃС‚РѕРІСѓС” РєРѕРЅРєР°С‚РµРЅР°С†С–СЋ СЃС‚РѕРІРїС†С–РІ.
 CREATE VIEW view_full_names AS SELECT concat(first_name, ' ', last_name) as full_name FROM users;
 
--- 7. Представлення, яке використовує вираз CASE.
-CREATE VIEW view_emp_7 AS SELECT ename, sal, case when sal <= 1000 then ‘UNDERPAID’ when sal >= 4000 then ‘OVERPAID’ else ‘OK’ end as status FROM emp;
+-- 7. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РІРёРєРѕСЂРёСЃС‚РѕРІСѓС” РІРёСЂР°Р· CASE.
+CREATE VIEW view_emp_7 AS SELECT ename, sal, case when sal <= 1000 then вЂUNDERPAIDвЂ™ when sal >= 4000 then вЂOVERPAIDвЂ™ else вЂOKвЂ™ end as status FROM emp;
 
--- 8. Представлення, яке повертає обмежену кількість рядків.
+-- 8. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” РѕР±РјРµР¶РµРЅСѓ РєС–Р»СЊРєС–СЃС‚СЊ СЂСЏРґРєС–РІ.
 CREATE VIEW view_emp_8 AS SELECT * FROM emp LIMIT 5;
 
--- 9. Представлення, яке повертає n випадкових рядків таблиці.
+-- 9. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, СЏРєРµ РїРѕРІРµСЂС‚Р°С” n РІРёРїР°РґРєРѕРІРёС… СЂСЏРґРєС–РІ С‚Р°Р±Р»РёС†С–.
 CREATE VIEW view_emp_9 AS SELECT ename, job FROM emp ORDER BY rand() LIMIT 5;
 
--- 10. Представлення з пошуком значень NULL
+-- 10. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ Р· РїРѕС€СѓРєРѕРј Р·РЅР°С‡РµРЅСЊ NULL
 CREATE VIEW view_null_users AS SELECT * FROM users WHERE username is null;
 
--- 11. Представлення з пошуком за шаблоном.
-CREATE VIEW view_emp_11 AS SELECT ename, job FROM emp WHERE deptno in (10, 20) and (ename like ‘%I%’ or job like ‘%ER’);
+-- 11. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ Р· РїРѕС€СѓРєРѕРј Р·Р° С€Р°Р±Р»РѕРЅРѕРј.
+CREATE VIEW view_emp_11 AS SELECT ename, job FROM emp WHERE deptno in (10, 20) and (ename like вЂ%I%вЂ™ or job like вЂ%ERвЂ™);
 
--- 12. Представлення, в якому рядки відсортовано за деяким полем.
+-- 12. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, РІ СЏРєРѕРјСѓ СЂСЏРґРєРё РІС–РґСЃРѕСЂС‚РѕРІР°РЅРѕ Р·Р° РґРµСЏРєРёРј РїРѕР»РµРј.
 CREATE VIEW view_emp_12 AS SELECT ename, job, sal FROM emp WHERE deptno = 10 ORDER BY sal asc;
 
--- 13. Представлення, в якому рядки відсортовано за більш ніж одним полем.
+-- 13. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, РІ СЏРєРѕРјСѓ СЂСЏРґРєРё РІС–РґСЃРѕСЂС‚РѕРІР°РЅРѕ Р·Р° Р±С–Р»СЊС€ РЅС–Р¶ РѕРґРЅРёРј РїРѕР»РµРј.
 CREATE VIEW view_emp_13 AS SELECT empno, deptno, sal, ename, job FROM emp ORDER BY deptno, sal desc;
 
--- 14. Представлення, в якому рядки відсортовано за під рядком (функція substring / substr).
+-- 14. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, РІ СЏРєРѕРјСѓ СЂСЏРґРєРё РІС–РґСЃРѕСЂС‚РѕРІР°РЅРѕ Р·Р° РїС–Рґ СЂСЏРґРєРѕРј (С„СѓРЅРєС†С–СЏ substring / substr).
 CREATE VIEW view_emp_14 AS SELECT ename, job FROM emp ORDER BY substr(job, length(job)-2);
 
--- 15. Представлення, в якому обробляються NULL значення при сортуванні.
+-- 15. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, РІ СЏРєРѕРјСѓ РѕР±СЂРѕР±Р»СЏСЋС‚СЊСЃСЏ NULL Р·РЅР°С‡РµРЅРЅСЏ РїСЂРё СЃРѕСЂС‚СѓРІР°РЅРЅС–.
 CREATE VIEW view_emp_15 AS SELECT ename, sal, comm FROM (SELECT ename, sal, com, case when comm is null then 0 else 1
 end as is_null FROM emp) ORDER BY is_null desc, comm;
 
--- 16. Представлення, в якому рядки відсортовано за залежністю даних від ключа.
-CREATE VIEW view_emp_16 AS SELECT ename, sal, job, comm, case when job = ‘SALESMAN’ then comm else sal end as ordered FROM emp ORDER BY 5;
+-- 16. РџСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ, РІ СЏРєРѕРјСѓ СЂСЏРґРєРё РІС–РґСЃРѕСЂС‚РѕРІР°РЅРѕ Р·Р° Р·Р°Р»РµР¶РЅС–СЃС‚СЋ РґР°РЅРёС… РІС–Рґ РєР»СЋС‡Р°.
+CREATE VIEW view_emp_16 AS SELECT ename, sal, job, comm, case when job = вЂSALESMANвЂ™ then comm else sal end as ordered FROM emp ORDER BY 5;
