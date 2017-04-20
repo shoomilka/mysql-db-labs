@@ -15,7 +15,9 @@ DROP TABLE IF EXISTS `users`;;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(10) COLLATE utf8_unicode_ci,
+  `first_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `bday` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
