@@ -5,13 +5,13 @@ CREATE VIEW view_all_users AS SELECT * FROM users;
 CREATE VIEW view_really_bd AS SELECT * FROM users WHERE created_at = updated_at;
 
 -- 3. Представлення, яке повертає рядки, що задовольняють наперед заданим умовам.
-CREATE VIEW view_emp_3 AS SELECT * FROM emp WHERE deptno = 10 or (sal <= 2000 and deptno = 20);
+CREATE VIEW view_1993 AS SELECT * FROM users WHERE bday >= '1993-01-01' and bday <= '1993-12-31';
 
 -- 4. Представлення, яке повертає конкретні стовпці.
-CREATE VIEW view_emp_4 AS SELECT ename, deptno, sal FROM emp;
+CREATE VIEW view_bdays AS SELECT username, bday FROM users;
 
 -- 5. Представлення, яке повертає конкретні стовпці, які мають зрозумілі та зручні для читання імена (псевдоніми).
-CREATE VIEW view_emp_5 AS SELECT ename as employee_name, sal as salary FROM emp;
+CREATE VIEW view_5 AS SELECT username as nick, bday as birth_day FROM users;
 
 -- 6. Представлення, яке використовує конкатенацію стовпців.
 CREATE VIEW view_full_names AS SELECT concat(first_name, ' ', last_name) as full_name FROM users;
