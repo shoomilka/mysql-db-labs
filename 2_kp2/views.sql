@@ -17,28 +17,34 @@ CREATE VIEW view_5 AS SELECT username as nick, bday as birth_day FROM users;
 CREATE VIEW view_full_names AS SELECT concat(first_name, ' ', last_name) as full_name FROM users;
 
 -- 7. Представлення, яке використовує вираз CASE.
-CREATE VIEW view_emp_7 AS SELECT ename, sal, case when sal <= 1000 then ‘UNDERPAID’ when sal >= 4000 then ‘OVERPAID’ else ‘OK’ end as status FROM emp;
+CREATE VIEW view_age AS SELECT username, bday,
+case
+when bday >= '2000-01-01' then 'child'
+when bday >= '1980-01-01' then 'person'
+else 'smbody' end as status FROM users;
 
 -- 8. Представлення, яке повертає обмежену кількість рядків.
-CREATE VIEW view_emp_8 AS SELECT * FROM emp LIMIT 5;
+CREATE VIEW view_13users AS SELECT * FROM users LIMIT 13;
 
 -- 9. Представлення, яке повертає n випадкових рядків таблиці.
-CREATE VIEW view_emp_9 AS SELECT ename, job FROM emp ORDER BY rand() LIMIT 5;
+CREATE VIEW view_rand AS SELECT username, first_name FROM users ORDER BY rand() LIMIT 13;
 
 -- 10. Представлення з пошуком значень NULL
 CREATE VIEW view_null_users AS SELECT * FROM users WHERE username is null;
 
 -- 11. Представлення з пошуком за шаблоном.
-CREATE VIEW view_emp_11 AS SELECT ename, job FROM emp WHERE deptno in (10, 20) and (ename like ‘%I%’ or job like ‘%ER’);
+CREATE VIEW view_few_bdays AS SELECT username, bday FROM users WHERE bday like '%-09-%' or bday like '%-04-%';
 
 -- 12. Представлення, в якому рядки відсортовано за деяким полем.
-CREATE VIEW view_emp_12 AS SELECT ename, job, sal FROM emp WHERE deptno = 10 ORDER BY sal asc;
+CREATE VIEW view_users_by_nick AS SELECT username as nick, first_name, last_name FROM users ORDER BY nick asc;
 
 -- 13. Представлення, в якому рядки відсортовано за більш ніж одним полем.
-CREATE VIEW view_emp_13 AS SELECT empno, deptno, sal, ename, job FROM emp ORDER BY deptno, sal desc;
+CREATE VIEW view_users_by_name AS SELECT username as nick, first_name, last_name FROM users ORDER BY first_name, last_name asc;
 
 -- 14. Представлення, в якому рядки відсортовано за під рядком (функція substring / substr).
-CREATE VIEW view_emp_14 AS SELECT ename, job FROM emp ORDER BY substr(job, length(job)-2);
+CREATE VIEW view_sort_sub AS SELECT username, first_name, last_name FROM users ORDER BY substr(first_name, length(first_name)-3);
+
+-- залишилось лише ці два 15 і 16
 
 -- 15. Представлення, в якому обробляються NULL значення при сортуванні.
 CREATE VIEW view_emp_15 AS SELECT ename, sal, comm FROM (SELECT ename, sal, com, case when comm is null then 0 else 1
