@@ -20,7 +20,7 @@ select count(firn) from(
                 right join login on users.id = login.user_id
                 right join login_fb on users.id = login_fb.user_id
         ) ta
-    ) tab where firn <> 'superstringcheckingvalue'
+    ) tab where firn <> 'superstringcheckingvalue';
 
 -- Представлення, в якому обчислити поточну суму.
 select f2.id, f2.fb_id,
